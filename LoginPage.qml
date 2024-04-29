@@ -40,7 +40,12 @@ Item {
                 onClicked: {
                     var username = usernameField.text
                     var password = passwordField.text
-                    console.log("Username:", username, "Password:", password)
+
+                    if (userDetailsManager.authenticateUser(username, password)) {
+                        stack.push("qrc:/homePage.qml")
+                    } else {
+                        loginInfo.text = "Login failed!!!"
+                    }
                 }
             }
 
@@ -60,6 +65,13 @@ Item {
                     onReleased: signupText.color = root.colorHover
                     onClicked: stack.push("qrc:/SignupPage.qml")
                 }
+            }
+
+            Text {
+                id: loginInfo
+                text: ""
+                color: "blue"
+                font.pointSize: 10;
             }
         }
     }

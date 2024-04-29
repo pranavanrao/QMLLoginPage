@@ -1,7 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.15
-import Qt.labs.platform 1.0
+import QtQuick.Dialogs 1.3
 
 Item {
     id: root
@@ -11,28 +11,7 @@ Item {
         height: parent.height
         color: "lightgreen"
 
-        Image {
-            id: backButton
-            source: "qrc:/images/back-button.png"
-            width: 40
-            fillMode: Image.PreserveAspectFit
-
-            anchors {
-                top: parent.top
-                left: parent.left
-                leftMargin: 20
-                topMargin: 20
-            }
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: stack.pop()
-
-                onPressed: backButton.width = 35
-                onReleased: backButton.width = 40
-            }
-        }
+        BackButton {}
 
         ColumnLayout {
             anchors.centerIn: parent
@@ -69,33 +48,18 @@ Item {
             Button {
                 text: "Signup"
                 onClicked: {
-                    var username = usernameField.text
-                    var email = emailField.text
-                    var password = passwordField.text
-                    var confirmPassword = confirmPasswordField.text
-
-                    if (password != confirmPassword) {
-                        messageBox.visible = true;
+                    if (passwordField.text !== confirmPasswordField.text) {
+                        messageBox.color = "red";
                         return;
                     }
-
-                    var userDetails = {
-                        "username": username,
-                        "email": email,
-                        "Password": password
-                    }
-
-                    var file = Qt.createFile("user")
-
-                    console.log("Signup details saved:", fileText);
+                    userDetailsManager.saveUserDetails(usernameField.text, emailField.text, passwordField.text);
                 }
             }
 
             Text {
                 id: messageBox
-                text: ""
-                color: "red"
-                visible: false
+                text: "Password doesn't match confirm password"
+                color: "transparent"
             }
         }
     }

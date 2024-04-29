@@ -1,5 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QDebug>
+#include <QQmlContext>
+
+#include "userdetailsmanagement.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,8 +12,14 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
+    UserDetailsManagement userDetailManagement;
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+    qDebug() << engine.offlineStoragePath();
+
+    engine.rootContext()->setContextProperty("userDetailsManager", &userDetailManagement);
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,
