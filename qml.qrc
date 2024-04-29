@@ -5,6 +5,7 @@
         <file>SignupPage.qml</file>
         <file>homePage.qml</file>
         <file>BackButton.qml</file>
+        <file>ButtonWidget.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>back-button.png</file>

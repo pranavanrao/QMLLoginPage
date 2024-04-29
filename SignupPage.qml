@@ -9,7 +9,7 @@ Item {
     Rectangle {
         width: parent.width
         height: parent.height
-        color: "lightgreen"
+        color: "lightblue"
 
         BackButton {}
 
@@ -45,14 +45,19 @@ Item {
                 echoMode: TextInput.Password
             }
 
-            Button {
-                text: "Signup"
-                onClicked: {
-                    if (passwordField.text !== confirmPasswordField.text) {
-                        messageBox.color = "red";
-                        return;
+            ButtonWidget {
+                txt: "Signup"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (passwordField.text !== confirmPasswordField.text) {
+                            messageBox.color = "red";
+                            return;
+                        }
+                        userDetailsManager.saveUserDetails(usernameField.text, emailField.text, passwordField.text);
                     }
-                    userDetailsManager.saveUserDetails(usernameField.text, emailField.text, passwordField.text);
                 }
             }
 

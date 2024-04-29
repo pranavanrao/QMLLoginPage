@@ -35,16 +35,21 @@ Item {
                 echoMode: TextInput.Password
             }
 
-            Button {
-                text: "Login"
-                onClicked: {
-                    var username = usernameField.text
-                    var password = passwordField.text
+            ButtonWidget {
+                txt: "Login"
 
-                    if (userDetailsManager.authenticateUser(username, password)) {
-                        stack.push("qrc:/homePage.qml")
-                    } else {
-                        loginInfo.text = "Login failed!!!"
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        var username = usernameField.text
+                        var password = passwordField.text
+
+                        if (userDetailsManager.authenticateUser(username, password)) {
+                            stack.push("qrc:/homePage.qml")
+                        } else {
+                            dialog.visible = true;
+                        }
                     }
                 }
             }
@@ -67,11 +72,15 @@ Item {
                 }
             }
 
-            Text {
-                id: loginInfo
-                text: ""
-                color: "blue"
-                font.pointSize: 10;
+            Dialog {
+                id: dialog
+                title: "Error"
+                standardButtons: Dialog.Ok
+                visible: false
+                Text {
+                    text: "Passwords do not match."
+                    font.bold: true
+                }
             }
         }
     }
