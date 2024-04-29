@@ -13,7 +13,8 @@ UserDetailsManagement::UserDetailsManagement(QObject *parent)
 bool UserDetailsManagement::openDatabase()
 {
     m_database = QSqlDatabase::addDatabase("QSQLITE");
-    m_database.setDatabaseName("user_database.db");
+
+    // Update the path based on your project file location
     m_database.setDatabaseName("C:/Users/prana/OneDrive/Desktop/QT-QML-projects/QMLLoginPage/user_database.db");
 
     if (!m_database.open()) {
