@@ -78,7 +78,7 @@ Item {
                 standardButtons: Dialog.Ok
                 visible: false
                 Text {
-                    text: "Passwords do not match."
+                    text: "Invalid username or password!!!"
                     font.bold: true
                 }
             }
