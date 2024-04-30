@@ -11,12 +11,12 @@ Item {
     property string password: ""
     property string confirmPassword: ""
 
+    BackButton {}
+
     Rectangle {
         width: parent.width
         height: parent.height
         color: "lightblue"
-
-        BackButton {}
 
         ColumnLayout {
             anchors.centerIn: parent
@@ -82,6 +82,7 @@ Item {
                         }
 
                         userDetailsManager.saveUserDetails(usernameField.text, emailField.text, passwordField.text);
+                        stack.pop();
                     }
                 }
             }
